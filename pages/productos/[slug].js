@@ -20,12 +20,10 @@ const Product = ({ product }) => {
   useEffect(() => {
     setCurrentImg(`${API_URL}${product.imagenes[0].url}`);
    
-    console.log(`${API_URL}${product.imagenes[0].url}`)
   }, [path]);
 
   return (
     <div>
-    {console.log(path)}
       <Head>
         {product.meta_title && <title>{product.meta_title}</title>}
         {product.meta_description && (

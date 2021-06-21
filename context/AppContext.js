@@ -1,9 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const AppContext = React.createContext();
 
 export const AppProvider = (props) => {
   const [cartArray, setCartArray] = useState([]);
+  const [cartTotal, setCartTotal] = useState(0);
+
+  useEffect(() => {
+    setCartArray(JSON.parse(localStorage.getItem("cartArray")));
+  }, []);
 
   const addItemToCart = (value) => {
     let findDuplicated = false;
@@ -14,14 +19,38 @@ export const AppProvider = (props) => {
         setCartArray(auxArray);
         findDuplicated = true;
         console.log("duplicated");
+        if (typeof window !== "undefined") {
+          localStorage.setItem("cartArray", JSON.stringify(cartArray));
+        }
       }
     });
 
-    if(!findDuplicated){
+    if (!findDuplicated) {
       setCartArray((cartArray) => [...cartArray, value]);
+      if (typeof window !== "undefined") {
+        localStorage.setItem("cartArray", JSON.stringify(cartArray));
+      }
     }
 
     console.log(cartArray);
+  };
+
+  const deleteItemToCart = (value) => {
+    cartArray.forEach((current, index) => {
+      if (current.id === value.id) {
+        let auxArray = cartArray;
+        if (auxArray[index].cartQuantity <= 1) {
+          auxArray.splice(index, 1);
+        } else {
+          auxArray[index].cartQuantity -= 1;
+        }
+
+        setCartArray(auxArray);
+        if (typeof window !== "undefined") {
+          localStorage.setItem("cartArray", JSON.stringify(cartArray));
+        }
+      }
+    });
   };
 
   const updateQuantity = (nombre, variacion) => {
@@ -36,10 +65,27 @@ export const AppProvider = (props) => {
   };
 
   return (
-    <AppContext.Provider value={{ cartArray, addItemToCart, updateQuantity }}>
+    <AppContext.Provider
+      value={{
+        cartArray,
+        addItemToCart,
+        deleteItemToCart,
+        updateQuantity,
+        cartTotal,
+        setCartTotal,
+      }}
+    >
       {props.children}
     </AppContext.Provider>
   );
 };
+
+// AppProvider.getInitialProps = ({req}) => {
+//   const cookies = parseCookies(req);
+
+//   return {
+//     cookiesCartArray: cookies.cartArray
+//   }
+// }
 
 export default AppContext;

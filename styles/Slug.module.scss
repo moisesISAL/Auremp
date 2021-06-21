@@ -4,6 +4,7 @@
   margin-top: 6vh;
   margin-bottom: 10vh;
   position: relative;
+  
   .thumbnails {
     max-width: 12%;
     margin: 0 4vw;
@@ -119,4 +120,142 @@
     .image{
         width: 100%;
     }
+}
+
+@media (max-width: 1024px) {
+  .main {
+    display: flex;
+    align-items: center;
+    margin-top: 6vh;
+    margin-bottom: 10vh;
+    position: relative;
+    flex-wrap: wrap;
+    
+    .thumbnails {
+      order: 2;
+      max-width: 100%;
+      margin: 2vh auto;
+      display: flex;
+      .tnail_image {
+        width: 80px;
+        height: 110px;
+        margin: 0 1vw;
+        border: 1px solid #e0e0e0;
+        cursor: pointer;
+      }
+    }
+    
+    .image {
+      order: 1;
+      display: flex;
+      width: 100%;
+      align-items: center;
+      margin-right: 0vw;
+      justify-content: space-around;
+      margin-top: 2vh;
+      .current_image {
+        width: 56%;
+      }
+      .nav {
+        width: 60px;
+        height: 60px;
+        margin: 0 2vh;
+        cursor: pointer;
+      }
+    }
+  
+    .info {
+      order: 3;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      max-width: 100%;
+      margin: 0 2vh;
+  
+      h3 {
+        font-size: 4.5vh;
+        margin: 0;
+      }
+      .price {
+        font-size: 3.5vh;
+        margin: 0.5vw 0;
+        color: #d2d2d2;
+      }
+      p {
+        font-size: 1rem;
+        margin: 1vw 6vw 2vw 0vw;
+        max-height: 400px;
+        overflow-y: hidden;}
+        
+      .sabor {
+        margin: 8px 0;
+        font-size: 1.6vw;
+      }
+      .variaciones {
+        display: flex;
+        margin-bottom: 2vw;
+        .variacion_color {
+          width: 20px;
+          height: 20px;
+          margin: 0 8px 0 0;
+          border: 1px solid #e0e0e0;
+          cursor: pointer;
+        }
+      }
+    }
+  
+  }
+  
+  .banner{
+      position: relative;
+      width: 100%;
+      background-color: #252525;
+      
+      h3{
+          padding-top: 2vh;
+          text-align: center;
+          font-size: 3vh;
+          letter-spacing: 0.25vw;
+          margin-bottom: 1vh;
+      }
+  
+      .legends{
+          display: flex;
+          justify-content: space-around;
+          flex-wrap: wrap;
+          padding-bottom: 2vh;
+          
+          p{
+          min-width: 100%;
+          text-align: center;
+          font-size: 2vh;
+          color: #d2d2d2;
+          margin: 1vh 2vh;
+          }
+      }
+  }
+  
+  .brief{
+      position: relative;
+      max-width: 100%;
+      
+      .container{
+        width: 95%;
+        padding: 1vh;
+        background-color: #d2d2d2;
+        margin: 4vh auto;
+        h3{
+          margin: 0 auto 1vh;
+          font-size: 2.5vh;
+          font-weight: 600;
+          text-align: center;
+          color: #161616;
+        }
+      }
+      .image{
+          width: 100%;
+      }
+  }
+  
+  
 }

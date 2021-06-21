@@ -3,7 +3,7 @@ import React from 'react'
 const Footer = () => {
     return (
         <footer>
-            © Moises ISAL Digital
+            Made by Moises J. Perez - ISAL Digital
         </footer>
     )
 }

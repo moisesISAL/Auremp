@@ -18,9 +18,9 @@ const Product = ({ product }) => {
   const { addItemToCart } = useContext(AppContext);
   const path = useRouter().asPath;
 
-  useEffect(() => {
-    setCurrentImg(`${API_URL}${product.imagenes[0].url}`);
-   
+  useEffect(async () => {
+     setCurrentImg(`${API_URL}${product.imagenes[0].url}`);
+      console.log(`${API_URL}${product.imagenes[0].url}`)
   }, [path]);
 
   return (
@@ -47,7 +47,7 @@ const Product = ({ product }) => {
         <div className={styles.image}>
           <div className={styles.nav}>
             <Image
-              src="/left gold.png"
+              src="/leftgold.png"
               alt="Picture of the author"
               width="100"
               height="100"

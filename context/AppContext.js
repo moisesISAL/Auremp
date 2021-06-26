@@ -18,7 +18,6 @@ export const AppProvider = (props) => {
         auxArray[index].cartQuantity += 1;
         setCartArray(auxArray);
         findDuplicated = true;
-        console.log("duplicated");
         if (typeof window !== "undefined") {
           localStorage.setItem("cartArray", JSON.stringify(cartArray));
         }
@@ -31,8 +30,6 @@ export const AppProvider = (props) => {
         localStorage.setItem("cartArray", JSON.stringify(cartArray));
       }
     }
-
-    console.log(cartArray);
   };
 
   const deleteItemToCart = (value) => {
@@ -61,7 +58,6 @@ export const AppProvider = (props) => {
       }
     });
     setCartArray(auxArray);
-    console.log(cartArray);
   };
 
   return (

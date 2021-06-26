@@ -11,7 +11,6 @@ const Cart = () => {
   const [render, setRender] = useState();
 
   useEffect(() => {
-    console.log(cartArray)
     let aux = 0;
     cartArray.forEach(element => {
       aux = aux + (element.precio * element.cartQuantity)

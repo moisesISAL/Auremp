@@ -1,47 +1,64 @@
 import Head from "next/head";
 import Link from "next/link";
+import axios from "axios";
 import Image from "next/image";
 import styles from "../styles/Home.module.scss";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { API_URL } from "../utils/urls";
 import { twoDecimals } from "../utils/format";
 import Carrousel from "../components/Index/Carrousel";
 
-export default function Home({ products }) {
+export default function Home({ token }) {
+  const [products, setProducts] = useState()
+  useEffect( async () => {
+    const { data } = await axios.get(
+      "https://auremp-ecommerce.uc.r.appspot.com/productos",
+      {
+        headers: {
+          Authorization:
+            `Bearer ${token.jwt}`,
+        },
+      }
+    );
+    setProducts(data)
+
+  }, [])
+
   const [carrouselArray, setCarrouselArray] = useState([
-  <Carrousel
-    img_url="/uploads/aceite_cbd_820710753f.jpg"
-    text1="ACEITE CBD"
-    text2="SUB"
-    text3="LINGUAL"
-    description="Presentamos Oil Hemp nuestro extraordinario Aceite extracto de cáñamo
+    <Carrousel
+      img_url="/uploads/Caja_y_Gotero_fe8385e2ff.png"
+      text1="ACEITE CBD"
+      text2="SUB"
+      text3="LINGUAL"
+      description="Presentamos Oil Hemp nuestro extraordinario Aceite extracto de cáñamo
   de amplio espectro CBD completo puro, directamente de la planta."
-    slug="aceite-sublingual"
-  />, 
-  <Carrousel
-    img_url="/uploads/Gomitas_Yellow_2_6ad2691452.png"
-    text1="GOMITAS"
-    text2="CBD"
-    text3=""
-    description="Gomitas suaves, fáciles de consumir, brindan dosis consistentes y tienen un sabor delicioso"
-    />]);
-  const [actualNav, setActualNav] = useState(0)
+      slug="aceite-sublingual"
+    />,
+    <Carrousel
+      img_url="/uploads/Gomitas_Yellow_2_322ffc0d2c.png"
+      text1="GOMITAS"
+      text2="CBD"
+      text3=""
+      description="Gomitas suaves, fáciles de consumir, brindan dosis consistentes y tienen un sabor delicioso"
+    />,
+  ]);
+  const [actualNav, setActualNav] = useState(0);
 
   const handleNav = (direction) => {
-    if(direction === 'right'){
-      if(actualNav === carrouselArray.length-1 ){
-        setActualNav(0)
-      }else{
-        setActualNav(actualNav + 1)
+    if (direction === "right") {
+      if (actualNav === carrouselArray.length - 1) {
+        setActualNav(0);
+      } else {
+        setActualNav(actualNav + 1);
       }
     } else {
-      if(actualNav === 0 ){
-        setActualNav(carrouselArray.length-1)
-      }else{
-        setActualNav(actualNav - 1)
+      if (actualNav === 0) {
+        setActualNav(carrouselArray.length - 1);
+      } else {
+        setActualNav(actualNav - 1);
       }
     }
-  }
+  };
 
   return (
     <div>
@@ -54,11 +71,10 @@ export default function Home({ products }) {
       <div className={styles.main}>
         <div className={styles.carraousel_container}>
           {carrouselArray[actualNav]}
-          
         </div>
 
         <div className={styles.navigation}>
-          <div className={styles.left} onClick={()=>handleNav('left')}>
+          <div className={styles.left} onClick={() => handleNav("left")}>
             <Image
               src="/left.png"
               alt="Picture of the author"
@@ -67,7 +83,7 @@ export default function Home({ products }) {
             />
           </div>
 
-          <div className={styles.right} onClick={()=>handleNav('right')}>
+          <div className={styles.right} onClick={() => handleNav("right")}>
             <Image
               src="/right.png"
               alt="Picture of the author"
@@ -166,14 +182,22 @@ export default function Home({ products }) {
 }
 
 export async function getStaticProps() {
-  //fetch the products
-  const product_res = await fetch(`${API_URL}/productos/`);
-  const products = await product_res.json();
+
+  const { data } = await axios.post(
+    "https://auremp-ecommerce.uc.r.appspot.com/auth/local/",
+    {
+      "identifier": "moypg1999@gmail.com",
+      "password": "Auremp2021!",
+    }
+  );
+
+
+  const token = data;
 
   //return the products as props
   return {
     props: {
-      products, //products: products
+      token //products: products
     },
   };
 }

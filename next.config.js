@@ -1,5 +1,6 @@
+
 module.exports = {
     images: {
-      domains: ['localhost'],
+      domains: ['localhost', 'auremp-ecommerce.uc.r.appspot.com'],
     },
   }

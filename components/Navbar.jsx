@@ -46,8 +46,8 @@ const Navbar = () => {
             {router.pathname === "/" && <div className={styles.line}></div>}
           </li>
           <li>
-            <Link href={`/productos/aceite-sublingual`}>Aceites</Link>
-            {router.asPath === `/productos/aceite-sublingual` && <div className={styles.line}></div>}
+            <Link href={`/productos/aceite-sublingual-1000mg`}>Aceites</Link>
+            {router.asPath === `/productos/aceite-sublingual-1000mg` && <div className={styles.line}></div>}
             
           </li>
           <li>

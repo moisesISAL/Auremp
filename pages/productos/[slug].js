@@ -10,6 +10,7 @@ import Image from "next/image";
 import styles from "../../styles/Slug.module.scss";
 import { useEffect, useState, useContext } from "react";
 import AppContext from "../../context/AppContext";
+import axios from "axios";
 import { useRouter } from 'next/router'
 
 const Product = ({ product }) => {
@@ -129,8 +130,26 @@ const Product = ({ product }) => {
 };
 
 export async function getStaticProps({ params: { slug } }) {
-  const product_res = await fetch(`${API_URL}/productos/?slug=${slug}`);
-  const found = await product_res.json();
+
+  const res = await axios.post(
+    "https://auremp-ecommerce.uc.r.appspot.com/auth/local/",
+    {
+      identifier: "moypg1999@gmail.com",
+      password: "Auremp2021!",
+    }
+  );
+
+  const product_res = await axios.get(
+    `https://auremp-ecommerce.uc.r.appspot.com/productos/?slug=${slug}`,
+    {
+      headers: {
+        Authorization: `Bearer ${res.data.jwt}`,
+      },
+    }
+  );
+
+  // const product_res = await fetch();
+  const found = await product_res.data;
 
   return {
     props: {
@@ -141,8 +160,25 @@ export async function getStaticProps({ params: { slug } }) {
 
 export async function getStaticPaths() {
   //Retrieve all the possible paths
-  const product_res = await fetch(`${API_URL}/productos/`);
-  const products = await product_res.json();
+  const res = await axios.post(
+    "https://auremp-ecommerce.uc.r.appspot.com/auth/local/",
+    {
+      identifier: "moypg1999@gmail.com",
+      password: "Auremp2021!",
+    }
+  );
+
+  const product_res = await axios.get(
+    `https://auremp-ecommerce.uc.r.appspot.com/productos/`,
+    {
+      headers: {
+        Authorization: `Bearer ${res.data.jwt}`,
+      },
+    }
+  );
+  
+  // const product_res = await fetch(`${API_URL}/productos/`);
+  const products = await product_res.data ;
 
   //Return them to NextJs context
   return {

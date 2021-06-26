@@ -8,21 +8,21 @@ import { API_URL } from "../utils/urls";
 import { twoDecimals } from "../utils/format";
 import Carrousel from "../components/Index/Carrousel";
 
-export default function Home({ token }) {
-  const [products, setProducts] = useState()
-  useEffect( async () => {
-    const { data } = await axios.get(
-      "https://auremp-ecommerce.uc.r.appspot.com/productos",
-      {
-        headers: {
-          Authorization:
-            `Bearer ${token.jwt}`,
-        },
-      }
-    );
-    setProducts(data)
+export default function Home({ products }) {
+  // const [products, setProducts] = useState()
+  // useEffect( async () => {
+  //   const { data } = await axios.get(
+  //     "https://auremp-ecommerce.uc.r.appspot.com/productos",
+  //     {
+  //       headers: {
+  //         Authorization:
+  //           `Bearer ${token.jwt}`,
+  //       },
+  //     }
+  //   );
+  //   setProducts(data)
 
-  }, [])
+  // }, [])
 
   const [carrouselArray, setCarrouselArray] = useState([
     <Carrousel
@@ -182,22 +182,29 @@ export default function Home({ token }) {
 }
 
 export async function getStaticProps() {
-
-  const { data } = await axios.post(
+  const res = await axios.post(
     "https://auremp-ecommerce.uc.r.appspot.com/auth/local/",
     {
-      "identifier": "moypg1999@gmail.com",
-      "password": "Auremp2021!",
+      identifier: "moypg1999@gmail.com",
+      password: "Auremp2021!",
     }
   );
 
+  const products_res = await axios.get(
+    "https://auremp-ecommerce.uc.r.appspot.com/productos",
+    {
+      headers: {
+        Authorization: `Bearer ${res.data.jwt}`,
+      },
+    }
+  );
 
-  const token = data;
+  const products = products_res.data;
 
   //return the products as props
   return {
     props: {
-      token //products: products
+      products: products, //products: products
     },
   };
 }

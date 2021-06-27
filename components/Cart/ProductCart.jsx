@@ -1,6 +1,5 @@
 import React, { useContext, useState } from "react";
 import styles from "../../styles/Cart.module.scss";
-import Image from "next/image";
 import { fromImageToUrl, API_URL } from "../../utils/urls";
 import { Plus, Minus } from "react-feather";
 import AppContext from "../../context/AppContext";
@@ -12,11 +11,9 @@ const ProductCart = ({ product, setRender }) => {
   return (
     <div className={styles.product}>
       <div className={styles.image}>
-        <Image
+        <img
           src={`${API_URL}${product.imagen_principal.formats.thumbnail.url}`}
-          width="90"
-          height="120"
-        ></Image>
+        ></img>
       </div>
       <div className={styles.info}>
         <h3>{product.nombre}</h3>

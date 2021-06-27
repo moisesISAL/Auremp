@@ -1,7 +1,6 @@
 import Head from "next/head";
 import Link from "next/link";
 import axios from "axios";
-import Image from "next/image";
 import styles from "../styles/Home.module.scss";
 import { useState, useEffect } from "react";
 import { API_URL } from "../utils/urls";
@@ -75,20 +74,16 @@ export default function Home({ products }) {
 
         <div className={styles.navigation}>
           <div className={styles.left} onClick={() => handleNav("left")}>
-            <Image
+            <img
               src="/left.png"
               alt="Picture of the author"
-              width="100"
-              height="100"
             />
           </div>
 
           <div className={styles.right} onClick={() => handleNav("right")}>
-            <Image
+            <img
               src="/right.png"
               alt="Picture of the author"
-              width="100"
-              height="100"
             />
           </div>
         </div>
@@ -101,24 +96,20 @@ export default function Home({ products }) {
         <div className={styles.products}>
           <div className={styles.card}>
             <div className={styles.img}>
-              <Image
+              <img
                 src={`${API_URL}/uploads/aceite_cbd_820710753f.jpg`}
                 alt="Picture of the author"
-                width="400"
-                height="600"
-                layout="responsive"
+
               />
             </div>
             <p className={styles.name}>Aceite Sublingual</p>
           </div>
           <div className={styles.card}>
             <div className={styles.img}>
-              <Image
+              <img
                 src={`${API_URL}/uploads/Gomitas_Yellow_2_6ad2691452.png`}
                 alt="Picture of the author"
-                width="400"
-                height="600"
-                layout="responsive"
+
               />
             </div>
             <p className={styles.name}>Gomitas</p>
@@ -140,7 +131,7 @@ export default function Home({ products }) {
 
       <div className={styles.about}>
         <div className={styles.about_img}>
-          <Image src="/about.jpg" layout="fill"></Image>
+          <img src="/about.jpg" ></img>
           <h3>
             Sobre <br></br> Nosotros
           </h3>
@@ -160,10 +151,10 @@ export default function Home({ products }) {
           </p>
         </div>
         <div className={styles.about_logo}>
-          <Image
+          <img
             src="/auremp-logo.png"
             alt="Picture of the author"
-            layout="fill"
+      
           />
         </div>
       </div>

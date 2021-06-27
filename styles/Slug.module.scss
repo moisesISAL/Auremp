@@ -14,6 +14,13 @@
       margin: 1vw 0;
       border: 1px solid #e0e0e0;
       cursor: pointer;
+      img{
+        object-fit: cover;
+        height: 100%;
+        margin: 0 50%;
+        -webkit-transform: translateX(-50%);
+        transform: translateX(-50%);
+      }
     }
   }
   
@@ -21,9 +28,17 @@
     display: flex;
     width: 48%;
     align-items: center;
+    justify-content: space-around;
     margin-right: 4vw;
     .current_image {
       width: 66%;
+      img{
+        object-fit: scale-down;
+        height: 40vh;
+        width: 100%;
+        margin: 0 50%;
+        transform: translateX(-50%);
+      }
     }
     .nav {
       width: 80px;

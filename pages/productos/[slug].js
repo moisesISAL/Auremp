@@ -1,27 +1,41 @@
 import Head from "next/head";
 import { twoDecimals } from "../../utils/format";
 import { API_URL } from "../../utils/urls";
-import {
-  CheckCircle,
-  Slash,
-  UserCheck,
-} from "react-feather";
-import Image from "next/image";
+import { CheckCircle, Slash, UserCheck } from "react-feather";
 import styles from "../../styles/Slug.module.scss";
 import { useEffect, useState, useContext } from "react";
 import AppContext from "../../context/AppContext";
 import axios from "axios";
-import { useRouter } from 'next/router'
+import { useRouter } from "next/router";
 
 const Product = ({ product }) => {
   const [currentImg, setCurrentImg] = useState("");
   const { addItemToCart } = useContext(AppContext);
   const path = useRouter().asPath;
+  const [actualNav, setActualNav] = useState(0);
 
-  useEffect(async () => {
-     setCurrentImg(`${API_URL}${product.imagenes[0].url}`);
-      console.log(`${API_URL}${product.imagenes[0].url}`)
+  useEffect(() => {
+    setCurrentImg(`${API_URL}${product.imagenes[0].url}`);
+    console.log(`${API_URL}${product.imagenes[0].url}`);
   }, [path]);
+
+  const handleNav = (direction) => {
+    if (direction === "right") {
+      if (actualNav === product.imagenes.length - 1) {
+        setActualNav(0);
+      } else {
+        setActualNav(actualNav + 1);
+      }
+      
+    } else {
+      if (actualNav === 0) {
+        setActualNav(product.imagenes.length - 1);
+      } else {
+        setActualNav(actualNav - 1);
+      }
+    }
+    setCurrentImg(`${API_URL}${product.imagenes[actualNav].url}`);
+  };
 
   return (
     <div>
@@ -34,40 +48,27 @@ const Product = ({ product }) => {
       <div className={styles.main}>
         <div className={styles.thumbnails}>
           {product.imagenes &&
-            product.imagenes.map((imagen) => (
-              <div className={styles.tnail_image}>
-                <Image
-                  src={`${API_URL}${imagen.formats.thumbnail.url}`}
-                  width="90"
-                  height="120"
-                ></Image>
+            product.imagenes.map((imagen, i) => (
+              <div
+                className={styles.tnail_image}
+                onClick={() => setCurrentImg(`${API_URL}${imagen.url}`)}
+              >
+                <img src={`${API_URL}${imagen.formats.thumbnail.url}`}></img>
               </div>
             ))}
         </div>
         <div className={styles.image}>
-          <div className={styles.nav}>
-            <Image
-              src="/leftgold.png"
-              alt="Picture of the author"
-              width="100"
-              height="100"
-            />
+          <div className={styles.nav} onClick={() => handleNav("left")}>
+            <img src="/leftgold.png" alt="Picture of the author" />
           </div>
           <div className={styles.current_image}>
-          <Image
-              src={currentImg ? ` ${currentImg}` : '/lifestyle.jpg'}
+            <img
+              src={currentImg ? ` ${currentImg}` : "/lifestyle.jpg"}
               alt="Picture of the author"
-              width="480"
-              height="620"
             />
           </div>
-          <div className={styles.nav}>
-            <Image
-              src="/right.png"
-              alt="Picture of the author"
-              width="100"
-              height="100"
-            />
+          <div className={styles.nav} onClick={() => handleNav("right")}>
+            <img src="/right.png" alt="Picture of the author" />
           </div>
         </div>
         <div className={styles.info}>
@@ -115,12 +116,9 @@ const Product = ({ product }) => {
         <div className={styles.container}>
           <h3>Ficha Técnica</h3>
           <div className={styles.image}>
-            <Image
+            <img
               src={`${API_URL}${product.info.url}`}
               alt="Picture of the author"
-              width={product.info ? `${product.info.width}` : ""}
-              height={product.info ? `${product.info.height}` : ""}
-              layout="responsive"
             />
           </div>
         </div>
@@ -130,7 +128,6 @@ const Product = ({ product }) => {
 };
 
 export async function getStaticProps({ params: { slug } }) {
-
   const res = await axios.post(
     "https://auremp-ecommerce.uc.r.appspot.com/auth/local/",
     {
@@ -176,9 +173,9 @@ export async function getStaticPaths() {
       },
     }
   );
-  
+
   // const product_res = await fetch(`${API_URL}/productos/`);
-  const products = await product_res.data ;
+  const products = await product_res.data;
 
   //Return them to NextJs context
   return {

@@ -9,20 +9,17 @@ const Carrousel = ({ img_url, text1, text2, text3, description, slug }) => {
     <div className={styles.carrousel}>
       <div className={styles.product}>
         <div className={styles.auremp_back}>
-          <Image
+          <img
             src="/auremp-logo.png"
             alt="Picture of the author"
-            width="900"
-            height="800"
+
           />
         </div>
         <div className={styles.product_img}>
-          <Image
+          <img
             src={`${API_URL}${img_url}`}
             alt="Picture of the author"
-            width="460"
-            height="620"
-            layout="responsive"
+
           />
         </div>
       </div>

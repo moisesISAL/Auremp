@@ -25,7 +25,7 @@ export default function Home({ products }) {
 
   const [carrouselArray, setCarrouselArray] = useState([
     <Carrousel
-      img_url="/uploads/uploads/Caja_y_Gotero_84be75410d.png"
+      img_url="/uploads/Caja_y_Gotero_84be75410d.png"
       text1="ACEITE CBD"
       text2="SUB"
       text3="LINGUAL"

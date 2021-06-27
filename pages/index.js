@@ -31,7 +31,7 @@ export default function Home({ products }) {
       text3="LINGUAL"
       description="Presentamos Oil Hemp nuestro extraordinario Aceite extracto de cáñamo
   de amplio espectro CBD completo puro, directamente de la planta."
-      slug="aceite-sublingual"
+      slug="aceite-sublingual-1000mg"
     />,
     <Carrousel
       img_url="/uploads/Gomitas_Yellow_2_1716976d7d.png"
@@ -39,6 +39,7 @@ export default function Home({ products }) {
       text2="CBD"
       text3=""
       description="Gomitas suaves, fáciles de consumir, brindan dosis consistentes y tienen un sabor delicioso"
+      slug='gomitas-cbd'
     />,
   ]);
   const [actualNav, setActualNav] = useState(0);

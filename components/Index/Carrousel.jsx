@@ -9,18 +9,10 @@ const Carrousel = ({ img_url, text1, text2, text3, description, slug }) => {
     <div className={styles.carrousel}>
       <div className={styles.product}>
         <div className={styles.auremp_back}>
-          <img
-            src="/auremp-logo.png"
-            alt="Picture of the author"
-
-          />
+          <img src="/auremp-logo.png" alt="Picture of the author" />
         </div>
         <div className={styles.product_img}>
-          <img
-            src={`${API_URL}${img_url}`}
-            alt="Picture of the author"
-
-          />
+          <img src={`${API_URL}${img_url}`} alt="Picture of the author" />
         </div>
       </div>
       <div className={styles.info}>
@@ -31,9 +23,12 @@ const Carrousel = ({ img_url, text1, text2, text3, description, slug }) => {
           {text3}
         </h2>
         <p>{description}</p>
-        <a className="btn btn-primary">
-          <Link href={`/productos/${slug}`}>Comprar</Link>
-        </a>
+
+
+        <Link href={`/productos/${slug}`}>
+        <a className="btn btn-primary">Comprar</a>
+        
+        </Link>
       </div>
     </div>
   );

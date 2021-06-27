@@ -16,7 +16,6 @@ const Product = ({ product }) => {
 
   useEffect(() => {
     setCurrentImg(`${API_URL}${product.imagenes[0].url}`);
-    console.log(`${API_URL}${product.imagenes[0].url}`);
   }, [path]);
 
   const handleNav = (direction) => {
@@ -49,7 +48,7 @@ const Product = ({ product }) => {
         <div className={styles.thumbnails}>
           {product.imagenes &&
             product.imagenes.map((imagen, i) => (
-              <div
+              <div key={i}
                 className={styles.tnail_image}
                 onClick={() => setCurrentImg(`${API_URL}${imagen.url}`)}
               >
@@ -59,7 +58,7 @@ const Product = ({ product }) => {
         </div>
         <div className={styles.image}>
           <div className={styles.nav} onClick={() => handleNav("left")}>
-            <img src="/leftgold.png" alt="Picture of the author" />
+            <img src="/leftg.png" alt="Picture of the author" />
           </div>
           <div className={styles.current_image}>
             <img

@@ -17,12 +17,17 @@
         position: relative;
 
         .auremp_back {
-          position: absolute;
-          bottom: 1vw;
-          left: -30vh;
-          width: 100vh;
-          mix-blend-mode: soft-light;
+         
+            position: absolute;
+            bottom: 1vw;
+            left: -40vh;
+            width: 100vh;
+            mix-blend-mode: soft-light;
+            img{
+              width: 90%;
+            }
         }
+
         .product_img {
           position: absolute;
           bottom: 10vh;
@@ -218,7 +223,7 @@
     position: relative;
     width: 50%;
     height: 80vh;
-    img{
+    img {
       width: 100%;
       height: 100%;
     }
@@ -497,7 +502,7 @@
       background-size: cover;
       mix-blend-mode: darken;
       filter: opacity(95%);
-  
+
       // width: 100%;
       height: 30vh;
       width: 100vw;
@@ -552,7 +557,7 @@
         line-height: 120%;
       }
     }
-  
+
     .info {
       width: 100%;
       background-color: #252525;
@@ -563,13 +568,13 @@
         font-size: 3vh;
         margin: 2vw 0 1vw 2vw;
       }
-  
+
       p {
         font-size: 2vh;
         margin: 0 2vw 2vw 2vw;
       }
     }
-  
+
     .about_logo {
       display: none;
       position: absolute;
@@ -581,7 +586,7 @@
       mix-blend-mode: color-dodge;
     }
   }
-  
+
   .suscribe {
     margin-top: 5vh;
     h3 {

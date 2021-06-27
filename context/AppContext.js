@@ -18,17 +18,15 @@ export const AppProvider = (props) => {
         auxArray[index].cartQuantity += 1;
         setCartArray(auxArray);
         findDuplicated = true;
-        if (typeof window !== "undefined") {
-          localStorage.setItem("cartArray", JSON.stringify(cartArray));
-        }
+
+        localStorage.setItem("cartArray", JSON.stringify(cartArray));
       }
     });
 
     if (!findDuplicated) {
       setCartArray((cartArray) => [...cartArray, value]);
-      if (typeof window !== "undefined") {
-        localStorage.setItem("cartArray", JSON.stringify(cartArray));
-      }
+
+      localStorage.setItem("cartArray", JSON.stringify(cartArray));
     }
   };
 
@@ -43,9 +41,8 @@ export const AppProvider = (props) => {
         }
 
         setCartArray(auxArray);
-        if (typeof window !== "undefined") {
-          localStorage.setItem("cartArray", JSON.stringify(cartArray));
-        }
+
+        localStorage.setItem("cartArray", JSON.stringify(cartArray));
       }
     });
   };

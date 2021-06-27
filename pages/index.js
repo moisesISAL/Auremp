@@ -25,7 +25,7 @@ export default function Home({ products }) {
 
   const [carrouselArray, setCarrouselArray] = useState([
     <Carrousel
-      img_url="/uploads/Caja_y_Gotero_fe8385e2ff.png"
+      img_url="/uploads/uploads/Caja_y_Gotero_84be75410d.png"
       text1="ACEITE CBD"
       text2="SUB"
       text3="LINGUAL"
@@ -34,7 +34,7 @@ export default function Home({ products }) {
       slug="aceite-sublingual"
     />,
     <Carrousel
-      img_url="/uploads/Gomitas_Yellow_2_322ffc0d2c.png"
+      img_url="/uploads/Gomitas_Yellow_2_1716976d7d.png"
       text1="GOMITAS"
       text2="CBD"
       text3=""

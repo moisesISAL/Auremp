@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState} from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Head from "next/head";
 import styles from "../styles/Cart.module.scss";
 import AppContext from "../context/AppContext";
@@ -12,11 +12,14 @@ const Cart = () => {
 
   useEffect(() => {
     let aux = 0;
-    cartArray.forEach(element => {
-      aux = aux + (element.precio * element.cartQuantity)
-    });
-    setTotalCost(aux)
-  }, [render])
+    if (cartArray !== null) {
+      cartArray.forEach((element) => {
+        aux = aux + element.precio * element.cartQuantity;
+      });
+    } 
+
+    setTotalCost(aux);
+  }, [render]);
 
   return (
     <div>
@@ -31,8 +34,14 @@ const Cart = () => {
         {cartArray.length > 0 ? (
           <div className={styles.items}>
             {cartArray.map((item) => {
-              
-              return <ProductCart setRender={setRender} setTotalCost key={item.id} product={item} />;
+              return (
+                <ProductCart
+                  setRender={setRender}
+                  setTotalCost
+                  key={item.id}
+                  product={item}
+                />
+              );
             })}
           </div>
         ) : (

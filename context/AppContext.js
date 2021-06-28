@@ -7,11 +7,16 @@ export const AppProvider = (props) => {
   const [cartTotal, setCartTotal] = useState(0);
 
   useEffect(() => {
-    setCartArray(JSON.parse(localStorage.getItem("cartArray")));
+    if (window.localStorage.getItem("cartArray")) {
+      setCartArray(JSON.parse(window.localStorage.getItem("cartArray")));
+    } else {
+      window.localStorage.setItem("cartArray", JSON.stringify(cartArray));
+    }
   }, []);
 
   const addItemToCart = (value) => {
     let findDuplicated = false;
+
     cartArray.forEach((current, index) => {
       if (current.id === value.id) {
         let auxArray = cartArray;
@@ -19,14 +24,14 @@ export const AppProvider = (props) => {
         setCartArray(auxArray);
         findDuplicated = true;
 
-        localStorage.setItem("cartArray", JSON.stringify(cartArray));
+        window.localStorage.setItem("cartArray", JSON.stringify(cartArray));
       }
     });
 
     if (!findDuplicated) {
       setCartArray((cartArray) => [...cartArray, value]);
 
-      localStorage.setItem("cartArray", JSON.stringify(cartArray));
+      window.localStorage.setItem("cartArray", JSON.stringify(cartArray));
     }
   };
 
@@ -42,7 +47,10 @@ export const AppProvider = (props) => {
 
         setCartArray(auxArray);
 
-        localStorage.setItem("cartArray", JSON.stringify(cartArray));
+        window.window.localStorage.setItem(
+          "cartArray",
+          JSON.stringify(cartArray)
+        );
       }
     });
   };

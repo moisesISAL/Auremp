@@ -25,7 +25,6 @@ const Product = ({ product }) => {
       } else {
         setActualNav(actualNav + 1);
       }
-      
     } else {
       if (actualNav === 0) {
         setActualNav(product.imagenes.length - 1);
@@ -48,7 +47,8 @@ const Product = ({ product }) => {
         <div className={styles.thumbnails}>
           {product.imagenes &&
             product.imagenes.map((imagen, i) => (
-              <div key={i}
+              <div
+                key={i}
                 className={styles.tnail_image}
                 onClick={() => setCurrentImg(`${API_URL}${imagen.url}`)}
               >
@@ -127,21 +127,25 @@ const Product = ({ product }) => {
 };
 
 export async function getStaticProps({ params: { slug } }) {
-  const res = await axios.post(
-    "https://auremp-ecommerce.uc.r.appspot.com/auth/local/",
-    {
-      identifier: "moypg1999@gmail.com",
-      password: "Auremp2021!",
-    }
-  );
+  // const res = await axios.post(
+  //   "https://strapi-auremp.herokuapp.com/auth/local/",
+  //   {
+  //     identifier: "aurempmoises@gmail.com",
+  //     password: "Auremp2021!",
+  //   }
+  // );
+
+  // const product_res = await axios.get(
+  //   `https://strapi-auremp.herokuapp.com/productos/?slug=${slug}`,
+  //   {
+  //     headers: {
+  //       Authorization: `Bearer ${res.data.jwt}`,
+  //     },
+  //   }
+  // );
 
   const product_res = await axios.get(
-    `https://auremp-ecommerce.uc.r.appspot.com/productos/?slug=${slug}`,
-    {
-      headers: {
-        Authorization: `Bearer ${res.data.jwt}`,
-      },
-    }
+    `https://strapi-auremp.herokuapp.com/productos/?slug=${slug}`
   );
 
   // const product_res = await fetch();
@@ -156,21 +160,25 @@ export async function getStaticProps({ params: { slug } }) {
 
 export async function getStaticPaths() {
   //Retrieve all the possible paths
-  const res = await axios.post(
-    "https://auremp-ecommerce.uc.r.appspot.com/auth/local/",
-    {
-      identifier: "moypg1999@gmail.com",
-      password: "Auremp2021!",
-    }
-  );
+  // const res = await axios.post(
+  //   "https://strapi-auremp.herokuapp.com/auth/local/login",
+  //   {
+  //     identifier: "aurempmoises@gmail.com",
+  //     password: "Auremp2021!",
+  //   }
+  // );
+
+  // const product_res = await axios.get(
+  //   `https://strapi-auremp.herokuapp.com/productos/`,
+  //   {
+  //     headers: {
+  //       Authorization: `Bearer ${res.data.jwt}`,
+  //     },
+  //   }
+  // );
 
   const product_res = await axios.get(
-    `https://auremp-ecommerce.uc.r.appspot.com/productos/`,
-    {
-      headers: {
-        Authorization: `Bearer ${res.data.jwt}`,
-      },
-    }
+    `https://strapi-auremp.herokuapp.com/productos/`
   );
 
   // const product_res = await fetch(`${API_URL}/productos/`);

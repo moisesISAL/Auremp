@@ -54,6 +54,14 @@ const Navbar = () => {
             <Link href={`/productos/gomitas-cbd`}>Gomitas</Link>
             {router.asPath === `/productos/gomitas-cbd` && <div className={styles.line}></div>}
           </li>
+          <li>
+            <Link href={`/productos/balsamo-cbd-sports`}>Balsamo</Link>
+            {router.asPath === `/productos/balsamo-cbd-sports` && <div className={styles.line}></div>}
+          </li>
+          <li>
+            <Link href={`/productos/crema-antiedad`}>Crema antiedad</Link>
+            {router.asPath === `/productos/crema-antiedad` && <div className={styles.line}></div>}
+          </li>
           {/* <li><Link href='#'>Suplementos</Link></li> */}
         </ul>
         <div className={styles.icons}>

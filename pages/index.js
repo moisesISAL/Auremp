@@ -25,7 +25,7 @@ export default function Home({ products }) {
 
   const [carrouselArray, setCarrouselArray] = useState([
     <Carrousel
-      img_url="/uploads/Caja_y_Gotero_84be75410d.png"
+      img_url={products.filter(p => p.id === '60e4faf5f6d8950015cd820a')[0].imagen_principal.url}
       text1="ACEITE CBD"
       text2="SUB"
       text3="LINGUAL"
@@ -34,7 +34,7 @@ export default function Home({ products }) {
       slug="aceite-sublingual-1000mg"
     />,
     <Carrousel
-      img_url="/uploads/Gomitas_Yellow_2_1716976d7d.png"
+      img_url={products.filter(p => p.id === '60e4fbc4f6d8950015cd8210')[0].imagen_principal.url}
       text1="GOMITAS"
       text2="CBD"
       text3=""
@@ -98,7 +98,7 @@ export default function Home({ products }) {
           <div className={styles.card}>
             <div className={styles.img}>
               <img
-                src={`${API_URL}/uploads/aceite_cbd_820710753f.jpg`}
+                src={products.filter(p => p.id === '60e4faf5f6d8950015cd820a')[0].imagen_principal.url}
                 alt="Picture of the author"
 
               />
@@ -108,7 +108,7 @@ export default function Home({ products }) {
           <div className={styles.card}>
             <div className={styles.img}>
               <img
-                src={`${API_URL}/uploads/Gomitas_Yellow_2_6ad2691452.png`}
+                src={products.filter(p => p.id === '60e4fbc4f6d8950015cd8210')[0].imagen_principal.url}
                 alt="Picture of the author"
 
               />
@@ -174,21 +174,25 @@ export default function Home({ products }) {
 }
 
 export async function getStaticProps() {
-  const res = await axios.post(
-    "https://auremp-ecommerce.uc.r.appspot.com/auth/local/",
-    {
-      identifier: "moypg1999@gmail.com",
-      password: "Auremp2021!",
-    }
-  );
+  // const res = await axios.post(
+  //   "https://strapi-auremp.herokuapp.com/auth/local/login",
+  //   {
+  //     identifier: "aurempmoises@gmail.com",
+  //     password: "Auremp2021!",
+  //   }
+  // );
+
+  // const products_res = await axios.get(
+  //   "https://strapi-auremp.herokuapp.com/productos",
+  //   {
+  //     headers: {
+  //       Authorization: `Bearer ${res.data.jwt}`,
+  //     },
+  //   }
+  // );
 
   const products_res = await axios.get(
-    "https://auremp-ecommerce.uc.r.appspot.com/productos",
-    {
-      headers: {
-        Authorization: `Bearer ${res.data.jwt}`,
-      },
-    }
+    "https://strapi-auremp.herokuapp.com/productos"
   );
 
   const products = products_res.data;

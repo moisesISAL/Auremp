@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 const AppContext = React.createContext();
 
 export const AppProvider = (props) => {
   const [cartArray, setCartArray] = useState([]);
   const [cartTotal, setCartTotal] = useState(0);
-
+  const checkoutBtn = useRef(null);
+  
   useEffect(() => {
     if (window.localStorage.getItem("cartArray")) {
       setCartArray(JSON.parse(window.localStorage.getItem("cartArray")));
@@ -74,6 +75,7 @@ export const AppProvider = (props) => {
         updateQuantity,
         cartTotal,
         setCartTotal,
+        checkoutBtn
       }}
     >
       {props.children}

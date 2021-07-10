@@ -5,7 +5,8 @@ const PriceInfo = ({ ship_cost, total_cost }) => {
   return (
     <div className={styles.price_info}>
       <p className={styles.ship_info}>
-        ENVIO GRATIS EN PEDIDOS MAYORES A <b>$1590.00</b>
+      ENVIO GRATIS
+        {/* ENVIO GRATIS EN PEDIDOS MAYORES A <b>$1590.00</b> */}
       </p>
       <div className={styles.costs}>
         <div>

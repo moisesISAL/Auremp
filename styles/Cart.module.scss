@@ -146,6 +146,127 @@
   }
 }
 
+.sum {
+  display: flex;
+  margin-top: 60px;
+  height: auto;
+  .shipping_info {
+    padding:0 8vw 0 12vw;
+    display: flex;
+    justify-content: flex-end;
+    width: 60%;
+    p{
+      font-size:2.6vw;
+      margin: 1rem 0 .5rem;
+
+    }
+    input{
+      width: 100%;
+      // height: 40px;
+      background-color: #1f1f1f;
+      border:none;
+      font-size: 20px;
+      margin: 8px 0px;
+      padding: 1rem;
+      color: #f0f0f0;
+    }
+  }
+  .cart_info {
+    background-color: #1f1f1f;
+    padding: 2vw 0 0 3vw ;
+    display: flex;
+    justify-content: flex-start;
+    width: 40%;
+    height: inherit;
+    .sum_products{
+      width: 100%;
+
+      .sum_shipping{
+        display: flex;
+        margin-top: 6vh;
+        justify-content: space-between;
+        p{
+          font-size: 1.5vw;
+          &:last-child{
+            margin-right:10%;
+            font-weight: bold;
+          }
+        }
+
+      }
+
+      .sum_total{
+        display: flex;
+
+        justify-content: space-between;
+        p{
+          margin: 0;
+          font-size: 1.5vw;
+          &:last-child{
+            margin-right:10%;
+            font-weight: bold;
+            font-size: 1.8vw
+          }
+        }
+      }
+
+      .sum_p{
+        display: flex;
+        margin-bottom: 2vh;
+        
+        .sum_thumbnail{
+          width: 10%;
+          height: 10%;
+          img{
+            object-fit:cover;
+          }
+        }
+
+        .info{
+          width: 60%; overflow-x: hidden;
+          margin: 0 0 0 1vw;
+          h4{
+            font-size: 1.25vw;
+            margin:0;
+          }
+          .sec{
+            display: flex;
+            p{
+              margin-right: 2vw; 
+            }
+          }
+        }
+
+        .sum_price{
+            font-size: 2vw;
+            margin: 0;
+        }
+      }
+    }
+  }
+  .fullname, .zipcode {
+    display: flex;
+    justify-content: space-between;
+    input{
+      width:49%;
+    }
+  }
+
+  .pay{
+    display: flex;
+    flex-direction: column;
+    h3{
+      order: 1;
+      text-align: center;
+    }
+    button{
+      order: 2;
+      width: 100%;
+    }
+  }
+
+}
+
 @media (max-width: 1024px) {
   .main {
     width: 100%;
@@ -159,7 +280,7 @@
       margin-left: 3vw;
       margin-bottom: 1rem;
     }
-  
+
     .noItems {
       margin: auto;
       width: 90%;
@@ -171,11 +292,11 @@
       }
     }
   }
-  
+
   .items {
     margin: auto;
     width: 90%;
-  
+
     .product {
       border-top: 1px solid #606060;
       height: 200px;
@@ -183,7 +304,7 @@
       display: flex;
       flex-wrap: wrap;
       padding-top: 6px;
-  
+
       .image {
         margin: auto 0;
         width: 20%;
@@ -197,15 +318,13 @@
           font-size: 2vh;
           font-weight: 500;
           margin: 0 0 1vh;
-          
-      
         }
         p {
           margin: 0;
           text-transform: capitalize;
         }
       }
-  
+
       .product_price {
         width: 40%;
         h3 {
@@ -220,11 +339,11 @@
           margin-top: 0;
         }
       }
-  
+
       .quantity {
         width: 60%;
         margin: 1vh 0 0;
-        
+
         .stock {
           margin: 1vh 0 0;
           font-weight: 300;
@@ -244,13 +363,13 @@
           display: flex;
           justify-content: space-around;
           align-items: center;
-  
+
           p {
             font-size: 3vh;
             width: 60%;
             margin: 1vh 0;
           }
-  
+
           svg {
             width: 100%;
             height: 4vh;
@@ -259,7 +378,7 @@
       }
     }
   }
-  
+
   .price_info {
     margin: auto;
     width: 90%;
@@ -268,7 +387,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-  
+
     .ship_info {
       width: 100%;
       font-size: 3vh;
@@ -291,12 +410,12 @@
       }
     }
   }
-  
+
   .continue {
     display: flex;
     justify-content: flex-end;
     padding-bottom: 2vh;
-  
+
     margin: auto;
     width: 90%;
     border-top: 1px solid #606060;
@@ -304,6 +423,4 @@
       margin: 2vh 0;
     }
   }
-  
-  
 }

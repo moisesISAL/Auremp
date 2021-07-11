@@ -39,9 +39,7 @@ const failure = ({
   );
 };
 
-export default failure;
-
-export async function getStaticProps({query}) {
+failure.getInitialProps = async ({ query }) => {
   const { payment_id, merchant_order_id, collection_status } = query;
 
   const { data } = await axios.post(
@@ -52,12 +50,7 @@ export async function getStaticProps({query}) {
     }
   );
 
-  return {
-    props: {
-      data: data,
-      payment_id: payment_id,
-      merchant_order_id: merchant_order_id,
-      collection_status: collection_status,
-    },
-  };
-}
+  return { payment_id, merchant_order_id, collection_status, data };
+};
+
+export default failure;

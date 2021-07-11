@@ -43,7 +43,7 @@ const pending = ({
 
 export default pending;
 
-export async function getStaticProps() {
+export async function getStaticProps({query}) {
   const { payment_id, merchant_order_id, collection_status } = query;
 
   const { data } = await axios.post(

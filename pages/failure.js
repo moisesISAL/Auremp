@@ -41,7 +41,7 @@ const failure = ({
 
 export default failure;
 
-export async function getStaticProps() {
+export async function getStaticProps({query}) {
   const { payment_id, merchant_order_id, collection_status } = query;
 
   const { data } = await axios.post(

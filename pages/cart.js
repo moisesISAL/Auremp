@@ -120,14 +120,20 @@ const Cart = ({token}) => {
 };
 
 Cart.getInitialProps = async (ctx) => { 
-  const {data} = await axios.post("https://strapi-auremp.herokuapp.com/auth/local", {
+  
+};
+
+export default Cart;
+
+export async function getStaticProps() {
+
+  const {data} = await axios.post("https://strapi-auremp.herokuapp.com/auth/local/", {
     identifier: process.env.STRAPI_IDENTIFIER,
     password: process.env.STRAPI_PASSWORD,
   });
 
   return {
-    token: data //products: products
+    props:{ token: data }
+   
   };
-};
-
-export default Cart;
+}

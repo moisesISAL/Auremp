@@ -41,15 +41,25 @@ const pending = ({
   );
 };
 
-pending.getInitialProps = async ({ query }) => {
+export default pending;
+
+export async function getStaticProps() {
   const { payment_id, merchant_order_id, collection_status } = query;
 
-  const { data } = await axios.post("https://strapi-auremp.herokuapp.com/auth/local", {
-    identifier: process.env.STRAPI_IDENTIFIER,
-    password: process.env.STRAPI_PASSWORD,
-  });
+  const { data } = await axios.post(
+    "https://strapi-auremp.herokuapp.com/auth/local",
+    {
+      identifier: process.env.STRAPI_IDENTIFIER,
+      password: process.env.STRAPI_PASSWORD,
+    }
+  );
 
-  return { payment_id, merchant_order_id, collection_status, data };
-};
-
-export default pending;
+  return {
+    props: {
+      data: data,
+      payment_id: payment_id,
+      merchant_order_id: merchant_order_id,
+      collection_status: collection_status,
+    },
+  };
+}

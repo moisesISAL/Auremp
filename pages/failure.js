@@ -3,13 +3,12 @@ import axios from "axios";
 import AppContext from "../context/AppContext";
 import styles from "../styles/Feedback.module.scss";
 
-const success = ({
+const failure = ({
   payment_id,
   merchant_order_id,
   collection_status,
   data,
 }) => {
-  const { cartArray, cartTotal } = useContext(AppContext);
 
   useEffect(async () => {
     // const auxArray = JSON.parse(window.localStorage.getItem("cartArray"));
@@ -37,13 +36,13 @@ const success = ({
   return (
     <div className={styles.feedback}>
       
-      <h1>¡Gracias por tu compra!</h1>
-      <h2>En breve recibirás un correo de confirmación</h2>
+      <h1>¡Pago Rechazado!</h1>
+      <h2>Intenta con otra forma de pago o intenta más tarde.</h2>
     </div>
   );
 };
 
-success.getInitialProps = async ({ query }) => {
+failure.getInitialProps = async ({ query }) => {
   const { payment_id, merchant_order_id, collection_status } = query;
 
   const { data } = await axios.post("https://strapi-auremp.herokuapp.com/auth/local", {
@@ -54,4 +53,4 @@ success.getInitialProps = async ({ query }) => {
   return { payment_id, merchant_order_id, collection_status, data };
 };
 
-export default success;
+export default failure;

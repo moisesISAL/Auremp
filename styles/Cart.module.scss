@@ -170,6 +170,36 @@
       padding: 1rem;
       color: #f0f0f0;
     }
+
+    button{
+      margin-top: 2vh;
+      width: 100%;
+    }
+  }
+  .shipping_review {
+    padding:0 8vw 0 12vw;
+    display: flex;
+    align-items: flex-end;
+    flex-direction:column;
+    width: 60%;
+    height: 100vh;
+    table{
+      margin-top: 4vh;
+      width: 100%;
+      background-color: #1f1f1f;
+      border-collapse: collapse;
+      
+      tr{
+        border:none;
+        font-size: 1.3rem;
+        td{
+          border-bottom: 2px solid #161616;
+          &:first-child{
+            padding:1rem  0.5rem;
+          }
+        }
+      }
+    }
   }
   .cart_info {
     background-color: #1f1f1f;
@@ -255,14 +285,100 @@
   .pay{
     display: flex;
     flex-direction: column;
+    width: 100%;
     h3{
       order: 1;
       text-align: center;
+      margin-top: 2rem;
     }
     button{
       order: 2;
       width: 100%;
     }
+  }
+
+  @media (max-width: 1024px) {
+    display: flex;
+    flex-direction: column;
+    .cart_info{
+      margin-top:2rem;
+      padding-top: 1rem;
+      width: 100%;
+      .sum_products{
+        .sum_p{
+          .info{
+            h4{
+              font-size:3.5vw;
+              margin-left: 4px;
+            }
+            .sec{
+              font-size: 3.5vw;
+              margin-left: 4px;
+            }
+          }
+          .sum_price{
+            margin-left: 6px;
+            font-size:4.5vw;
+          }
+        }
+        .sum_shipping{
+          margin-top: 4vh;
+          p{
+            font-size: 5vw;
+          }
+        }
+        .sum_total{
+          margin-bottom: 2vh;
+          p{
+            font-size: 5vw;
+            &:last-child{
+              font-size: 5vw;
+            }
+          }
+        }
+      }
+    }
+    .shipping_info{
+      width: 100%;
+      padding: 0 5vw 0 5vw;
+
+      form{
+        p{
+          font-size: 6vw;
+        }
+      }
+    }
+
+    .shipping_review {
+      padding:0;
+      display: flex;
+      align-items: center;
+      flex-direction:column;
+      
+      padding: 0 4vw;
+      width: 100%;
+      height: auto;
+      table{
+        margin-top: 4vh;
+        width: 100%;
+        background-color: #1f1f1f;
+        border-collapse: collapse;
+        
+        tr{
+          border:none;
+          font-size: 4vw;
+          padding: 1rem 0;
+          td{
+            border-bottom: 2px solid #161616;
+            
+            &:first-child{
+              padding:1rem  0.5rem;
+            }
+          }
+        }
+      }
+    }
+
   }
 
 }

@@ -5,13 +5,20 @@ const AppContext = React.createContext();
 export const AppProvider = (props) => {
   const [cartArray, setCartArray] = useState([]);
   const [cartTotal, setCartTotal] = useState(0);
-  const checkoutBtn = useRef(null);
+  const [shippingInfo, setShippingInfo] = useState("");
   
+  const checkoutBtn = useRef(null);
+
   useEffect(() => {
     if (window.localStorage.getItem("cartArray")) {
       setCartArray(JSON.parse(window.localStorage.getItem("cartArray")));
     } else {
       window.localStorage.setItem("cartArray", JSON.stringify(cartArray));
+    }
+    if (window.localStorage.getItem("totalCost")) {
+      setCartTotal(Number(window.localStorage.getItem("totalCost")));
+    } else {
+      window.localStorage.setItem("totalCost", 0);
     }
   }, []);
 
@@ -32,7 +39,7 @@ export const AppProvider = (props) => {
     if (!findDuplicated) {
       setCartArray((cartArray) => [...cartArray, value]);
 
-      window.localStorage.setItem("cartArray", JSON.stringify(cartArray));
+      window.localStorage.setItem("cartArray", JSON.stringify([...cartArray, value]));
     }
   };
 
@@ -75,7 +82,9 @@ export const AppProvider = (props) => {
         updateQuantity,
         cartTotal,
         setCartTotal,
-        checkoutBtn
+        checkoutBtn,
+        shippingInfo,
+        setShippingInfo,
       }}
     >
       {props.children}

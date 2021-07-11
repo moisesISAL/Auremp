@@ -1,102 +1,186 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import styles from "../../styles/Cart.module.scss";
 import AppContext from "../../context/AppContext";
+import axios from "axios";
 
-const Summary = () => {
-  const { checkoutBtn, cartArray, cartTotal } = useContext(AppContext);
-  const [nombre, setNombre] = useState();
-  const [apellido, setApellido] = useState();
-  const [email, setEmail] = useState();
-  const [empresa, setEmpresa] = useState();
-  const [domicilio, setDomicilio] = useState();
-  const [ciudad, setCiudad] = useState();
-  const [estado, setEstado] = useState();
-  const [codigoPostal, setCodigoPostal] = useState();
-  const [telefono, setTelefono] = useState();
-  const [disabled, setDisabled] = useState();
+const Summary = ({ setReview, review, token }) => {
+  const { checkoutBtn, cartArray, cartTotal, setShippingInfo, shippingInfo } =
+    useContext(AppContext);
+
+  const handleShipping = async (e) => {
+    e.preventDefault();
+    window.localStorage.setItem(
+      "shippingInfo",
+      JSON.stringify({
+        email: e.target.email.value,
+        nombre: e.target.nombre.value,
+        apellido: e.target.apellido.value,
+        empresa: e.target.empresa.value,
+        domicilio: e.target.domicilio.value,
+        ciudad: e.target.ciudad.value,
+        estado: e.target.estado.value,
+        codigoPostal: e.target.codigoPostal.value,
+        telefono: e.target.telefono.value,
+      })
+    );
+    setShippingInfo(JSON.parse(window.localStorage.getItem("shippingInfo")));
+    setReview(true);
+
+    const auxArray = JSON.parse(window.localStorage.getItem("cartArray"));
+    const shipping = JSON.parse(window.localStorage.getItem("shippingInfo"));
+    const totalCost = window.localStorage.getItem("totalCost");
+
+    window.localStorage.setItem("currentOrder", await axios.post(
+      "http://localhost:1337/ordens",
+      {
+        total: totalCost,
+        mail: shipping.email,
+        productos: auxArray,
+        direccion: `${shipping.nombre} ${shipping.apellido}, 
+            ${shipping.domicilio}, ${shipping.ciudad}
+            ${shipping.estado} ${shipping.codigoPostal}, Tel.: ${shipping.telefono}`,
+
+        telefono: shipping.telefono,
+        descripcion: auxArray
+          .map(
+            (product) =>
+              `nombre: ${product.nombre}, cantidad: ${product.cartQuantity} `
+          )
+          .toString(),
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token.jwt}`,
+        },
+      }
+    ).then((res)=>{
+      return JSON.stringify(res);
+    }));
+
+    
+
+  };
 
   return (
     <div className={styles.sum}>
-      <div className={styles.shipping_info}>
-        <form>
-          <p> Información de contacto </p>
-          <input
-            type="email"
-            value={email}
-            className={styles.sum_mail}
-            placeholder="Email"
-            onChange={(e) => setEmail(e.target.value)}
-          ></input>
-          <p>Dirección de envio</p>
-          <div className={styles.fullname}>
+      {!review ? (
+        <div className={styles.shipping_info}>
+          <form onSubmit={(e) => handleShipping(e)}>
+            <p> Información de contacto </p>
             <input
-              value={nombre}
+              type="email"
+              id="email"
+              // name="email"
+              autoComplete="email"
+              className={styles.sum_mail}
+              placeholder="Email"
+              required
+            ></input>
+            <p>Dirección de envio</p>
+            <div className={styles.fullname}>
+              <input
+                id="nombre"
+                autoComplete="nombre"
+                type="text"
+                className=""
+                placeholder="Nombre"
+                required
+              ></input>
+              <input
+                id="apellido"
+                autoComplete="apellido"
+                type="text"
+                className=""
+                placeholder="Apellido"
+                required
+              ></input>
+            </div>
+            <input
+              id="empresa"
+              autoComplete="empresa"
               type="text"
               className=""
-              placeholder="Nombre"
-              onChange={(e) => setNombre(e.target.value)}
+              placeholder="Empresa (opcional)"
             ></input>
             <input
-              value={apellido}
+              id="domicilio"
+              autoComplete="domicilio"
               type="text"
+              required
               className=""
-              placeholder="Apellido"
-              onChange={(e) => setApellido(e.target.value)}
-            ></input>
-          </div>
-          <input
-            value={empresa}
-            type="text"
-            className=""
-            placeholder="Empresa (opcional)"
-            onChange={(e) => setEmpresa(e.target.value)}
-          ></input>
-          <input
-            value={domicilio}
-            type="text"
-            onChange={(e) => setDomicilio(e.target.value)}
-            className=""
-            placeholder="Domicilio"
-          ></input>
-          <input
-            value={ciudad}
-            type="text"
-            className=""
-            onChange={(e) => setCiudad(e.target.value)}
-            placeholder="Ciudad"
-          ></input>
-          <div className={styles.zipcode}>
-            <input
-              type="text"
-              value={estado}
-              onChange={(e) => setEstado(e.target.value)}
-              className=""
-              placeholder="Estado"
+              placeholder="Domicilio"
             ></input>
             <input
+              id="ciudad"
+              autoComplete="ciudad"
               type="text"
-              value={codigoPostal}
               className=""
-              onChange={(e) => setCodigoPostal(e.target.value)}
-              placeholder="Codigo Postal"
+              required
+              placeholder="Ciudad"
             ></input>
-          </div>
-          <input
-            value={telefono}
-            type="text"
-            className=""
-            placeholder="Número de Teléfono (10 digitos)"
-            onChange={(e) => setTelefono(e.target.value)}
-          ></input>
+            <div className={styles.zipcode}>
+              <input
+                type="text"
+                id="estado"
+                autoComplete="estado"
+                required
+                className=""
+                placeholder="Estado"
+              ></input>
+              <input
+                type="number"
+                id="codigoPostal"
+                autoComplete="codigoPostal"
+                className=""
+                required
+                placeholder="Codigo Postal"
+              ></input>
+            </div>
+            <input
+              id="telefono"
+              autoComplete="telefono"
+              type="number"
+              className=""
+              placeholder="Número de Teléfono (10 digitos)"
+              required
+            ></input>
+
+            <button className="btn btn-primary" type="submit">Ir a revisar compra</button>
+          </form>
+        </div>
+      ) : (
+        <div className={styles.shipping_review}>
+          <table>
+            <tbody>
+              <tr>
+                <td>Contacto:</td>
+                <td>
+                  Email: {shippingInfo.email}{" "}
+                  {shippingInfo.telefono && <br></br>}
+                  {shippingInfo.telefono && `Tel: ${shippingInfo.telefono}`}
+                </td>
+              </tr>
+              <tr>
+                <td>Enviar a:</td>
+                <td>
+                  {shippingInfo.nombre} {shippingInfo.apellido},{" "}
+                  {shippingInfo.domicilio}, {shippingInfo.ciudad}{" "}
+                  {shippingInfo.estado} {shippingInfo.codigoPostal}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
           <div className={styles.pay} ref={checkoutBtn}>
             <h3>Pago seguro mediante MercadoPago</h3>
           </div>
-        </form>
-      </div>
+        </div>
+      )}
+
       <div className={styles.cart_info}>
         <div className={styles.sum_products}>
-          {cartArray.map((p) => (
-            <div className={styles.sum_p}>
+          {cartArray.map((p, i) => (
+            <div key={i} className={styles.sum_p}>
               <div className={styles.sum_thumbnail}>
                 <img src={`${p.imagen_principal.formats.thumbnail.url}`} />
               </div>
@@ -128,5 +212,7 @@ const Summary = () => {
     </div>
   );
 };
+
+
 
 export default Summary;

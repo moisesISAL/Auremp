@@ -45,8 +45,8 @@ pending.getInitialProps = async ({ query }) => {
   const { payment_id, merchant_order_id, collection_status } = query;
 
   const { data } = await axios.post("https://strapi-auremp.herokuapp.com/auth/local", {
-    identifier: "pedidos@auremp.com",
-    password: "Auremp2021!",
+    identifier: process.env.STRAPI_IDENTIFIER,
+    password: process.env.STRAPI_PASSWORD,
   });
 
   return { payment_id, merchant_order_id, collection_status, data };

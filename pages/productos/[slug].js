@@ -163,8 +163,8 @@ export async function getStaticPaths() {
   // const res = await axios.post(
   //   "https://strapi-auremp.herokuapp.com/auth/local/login",
   //   {
-  //     identifier: "aurempmoises@gmail.com",
-  //     password: "Auremp2021!",
+  //     identifier: "",
+  //     password: "",
   //   }
   // );
 

@@ -119,10 +119,6 @@ const Cart = ({token}) => {
   );
 };
 
-Cart.getInitialProps = async (ctx) => { 
-  
-};
-
 export default Cart;
 
 export async function getStaticProps() {

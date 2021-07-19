@@ -102,7 +102,7 @@ const Product = ({ product }) => {
           </p>{" "}
           <p>
             {" "}
-            <CheckCircle /> Avalados por la PROFECO
+            <CheckCircle /> Avalados por COFEPRIS
           </p>{" "}
           <p>
             {" "}
